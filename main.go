@@ -12,6 +12,9 @@ import (
 func main() {
 	_ = godotenv.Load(".env")
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 
 	http.Handle("/public/",
 		http.StripPrefix("/public/",
@@ -34,6 +37,6 @@ func main() {
 		}
 	})
 
-	log.Printf("Application running on %s\n", port)
+	log.Printf("Application running on port %s\n", port)
 	log.Fatalln(http.ListenAndServe(":"+port, nil))
 }
