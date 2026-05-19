@@ -9,8 +9,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main() {
+var OK = []byte("ok")
+
+func init() {
 	_ = godotenv.Load(".env")
+}
+
+func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -21,6 +26,10 @@ func main() {
 			http.FileServer(http.Dir("public")),
 		),
 	)
+
+	http.HandleFunc("/health-check", func(w http.ResponseWriter, r *http.Request) {
+		_, _ = w.Write(OK)
+	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		mainT, err := template.ParseFiles("internal/templates/main-page.html.tmpl")
