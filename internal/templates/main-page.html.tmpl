@@ -6,311 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="public/gini-logo.png">
-    <title>Gini — Go Init</title>
-    <meta name="description" content="Gini (Go Init) — CLI tool to scaffold Go projects quickly.">
-    <style>
-        :root {
-            --bg: #0f1724;
-            --card: #0b1220;
-            --muted: #94a3b8;
-            --accent: #0947a3;
-            --glass: rgba(255, 255, 255, 0.03);
-            --white: #e6eef8;
-            --maxw: 980px;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        }
 
+    <title>Gini | Scaffold Go Projects Fast</title>
+    <meta name="description" content="Gini — Open-source CLI tool to scaffold Go projects quickly with sensible defaults and minimal friction.">
 
-        body {
-            --sb-track-color: linear-gradient(180deg, #071028 0%, #071227 60%);
-            --sb-thumb-color: #e6eef8;
-            --sb-size: 10px;
-        }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        body::-webkit-scrollbar {
-            width: var(--sb-size)
-        }
+    <!-- Styles -->
+    <link rel="stylesheet" href="public/css/style.css">
 
-        body::-webkit-scrollbar-track {
-            background: var(--sb-track-color);
-            border-radius: 0%;
-        }
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gini.rafael.dev/">
+    <meta property="og:title" content="Gini — Go Init | Fast Go Scaffolding">
+    <meta property="og:description" content="Scaffold Go projects in seconds with Gini. Designed for speed and consistency.">
+    <meta property="og:image" content="public/Gini.png">
 
-        body::-webkit-scrollbar-thumb {
-            background: var(--sb-thumb-color);
-            border-radius: 5px;
-            border: 0px solid #062438;
-        }
-
-        @supports not selector(::-webkit-scrollbar) {
-            body {
-                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-            }
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            background: linear-gradient(180deg, #071028 0%, #071227 60%);
-            color: var(--white);
-            -webkit-font-smoothing: antialiased
-        }
-
-        .container {
-            max-width: var(--maxw);
-            margin: 48px auto;
-            padding: 24px
-        }
-
-        header {
-            display: flex;
-            gap: 18px;
-            align-items: center
-        }
-
-        .logo {
-            width: 84px;
-            height: 84px;
-            flex: 0 0 84px;
-            border-radius: 14px;
-            background: var(--glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden
-        }
-
-        .logo img {
-            max-width: 100%;
-            display: block
-        }
-
-        h1 {
-            font-size: 22px;
-            margin: 0
-        }
-
-        .tag {
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 28px;
-            margin-top: 18px
-        }
-
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.015));
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(2, 6, 23, 0.6)
-        }
-
-        .lead {
-            color: var(--muted);
-            line-height: 1.5
-        }
-
-        ul.features {
-            margin: 12px 0 0 18px
-        }
-
-        ul.features li {
-            margin: 8px 0
-        }
-
-        .cta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-top: 16px
-        }
-
-        .btn {
-            background: linear-gradient(90deg, var(--accent), #0e3878);
-            border: none;
-            color: white;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 6px 18px rgba(15, 74, 223, 0.18)
-        }
-
-        .btn.ghost {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: var(--white);
-            font-weight: 600
-        }
-
-        .btn:active {
-            transform: translateY(1px)
-        }
-
-        pre {
-            background: #07122a;
-            padding: 14px;
-            border-radius: 8px;
-            overflow: auto;
-            color: #dbeafe
-        }
-
-        code {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
-            font-size: 13px
-        }
-
-        .right {
-            display: flex;
-            flex-direction: column;
-            gap: 12px
-        }
-
-        .meta {
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        footer {
-            margin-top: 28px;
-            color: var(--muted);
-            font-size: 13px;
-            text-align: center
-        }
-
-        @media (max-width:880px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
-
-            .right {
-                order: 2
-            }
-        }
-    </style>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Gini — Go Init | Fast Go Scaffolding">
+    <meta property="twitter:description" content="Scaffold Go projects in seconds with Gini. Designed for speed and consistency.">
+    <meta property="twitter:image" content="public/Gini.png">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <div class="logo card" aria-hidden>
-                <!-- Place your image at public/Gini.png -->
+            <div class="logo-glow" aria-hidden="true">
                 <img src="public/gini-logo.png" alt="Gini logo" />
             </div>
-            <div>
-                <h1>Gini — Go Init</h1>
-                <div class="tag">Open-source CLI for fast Go project scaffolding</div>
-            </div>
+            <h1>Gini — Go Init</h1>
+            <p class="tagline">Scaffold production-ready Go projects in seconds. Skip the boilerplate, focus on your logic.</p>
         </header>
 
-        <main class="hero">
-            <section class="card">
-                <p class="lead">
-                    <strong>Gini</strong> is an open-source CLI tool that accelerates Go project setup by generating
-                    a structured project layout with essential tooling and sensible defaults.
-                    It removes repetitive boilerplate so you can focus on writing actual business logic.
-                </p>
+        <section class="terminal-window">
+            <div class="terminal-header">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="terminal-body">
+                <div id="terminal-content"></div>
+            </div>
+        </section>
 
-                <img src="public/Gini.png" alt="Gini screenshot" />
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3>Instant Scaffolding</h3>
+                <p>Generate a clean, standard-compliant project layout in seconds. No more manual folder creation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3>Zero Friction</h3>
+                <p>Sensible defaults and essential tooling pre-configured. Start coding your features immediately.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3>Production Ready</h3>
+                <p>First-class support for Docker and Nix. Consistent environments from dev to production.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3>Lightweight & Focused</h3>
+                <p>Open-source, lightweight, and focused. Built by a developer for developers who value simplicity.</p>
+            </div>
+        </div>
 
-                <h3 style="margin-top:16px">Features</h3>
-                <ul class="features">
-                    <li>Ready-to-use configuration and defaults</li>
-                    <li>Fast project scaffolding</li>
-                    <li>Minimal setup, zero friction</li>
-                    <li>Designed for small project / MVP Go applications</li>
-                    <li>Nix support</li>
-                </ul>
+        <section class="install-section">
+            <h2>Ready to speed up?</h2>
+            <p class="tagline">Install the binary globally and start building.</p>
 
-                <h3 style="margin-top:16px">How to use</h3>
-                <pre><code>$ gini build</code></pre>
-                <p class="meta">This will create a new directory with the predefined structure and configuration.</p>
+            <div class="code-box">
+                <code id="install-code">go install github.com/rafaeldepontes/gini@latest</code>
+                <button class="copy-btn">Copy</button>
+            </div>
 
-                <h3 style="margin-top:14px">Installation</h3>
-                <p class="meta">Go Install</p>
-                <pre><code>go install github.com/rafaeldepontes/gini@latest</code></pre>
-                <p class="meta">This installs a go binary that will automatically bind to your $GOPATH. Make sure
-                    <code>$GOPATH/bin</code> is in your <code>$PATH</code>.
-                </p>
-
-                <h3 style="margin-top:14px">Requirements</h3>
-                <ul class="features">
-                    <li>Go 1.26.0 or newer</li>
-                </ul>
-
-                <h3 style="margin-top:14px">Why Gini?</h3>
-                <p class="lead">Setting up Go projects repeatedly is tedious and setting up the dockerfile and
-                    docker-compose is kinda lame... Gini provides a consistent starting point, helping you:</p>
-                <ul class="features">
-                    <li>Reduce setup time</li>
-                    <li>Maintain project structure consistency</li>
-                    <li>Create your Dockerfile and docker-compose with everything you need.</li>
-                </ul>
-
-                <h3 style="margin-top:14px">Roadmap</h3>
-                <ul class="features">
-                    <li>Custom templates</li>
-                    <li>Docker</li>
-                    <li>Configurable project layouts</li>
-                </ul>
-
-                <h3 style="margin-top:14px">Contributing</h3>
-                <p class="meta">Contributions are welcome. Feel free to open issues or submit pull requests.</p>
-
-                <div class="cta">
-                    <button id="githubBtn" class="btn" title="Open GitHub repository">View on GitHub</button>
-                    <a id="licenseBtn" class="btn ghost" title="View license">License (MIT)</a>
-                </div>
-            </section>
-
-            <aside class="right">
-                <div class="card">
-                    <h4 style="margin:0 0 8px 0">Project</h4>
-                    <p class="meta">Project link and contact</p>
-                    <p style="margin:8px 0"><strong>GitHub:</strong> <a href="https://github.com/rafaeldepontes/gini"
-                            target="_blank" rel="noopener"
-                            style="color:var(--accent)">github.com/rafaeldepontes/gini</a></p>
-
-                    <h4 style="margin-top:12px">Contact</h4>
-                    <p style="margin:8px 0"><a href="mailto:rafael.cr.carneiro@gmail.com"
-                            style="color:var(--accent)">rafael.cr.carneiro@gmail.com</a></p>
-                </div>
-            </aside>
-        </main>
+            <div class="cta-group">
+                <a href="https://github.com/rafaeldepontes/gini" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
+                <a href="https://github.com/rafaeldepontes/gini/blob/main/LICENSE" class="btn btn-ghost" target="_blank" rel="noopener">MIT License</a>
+            </div>
+        </section>
 
         <footer>
-            <small>Gini — Go Init · Built by Rafael · <a href="https://github.com/rafaeldepontes/gini" target="_blank"
-                    rel="noopener" style="color:var(--accent)">Open on GitHub</a></small>
+            <p>
+                Gini — Go Init · Handcrafted by <a href="https://github.com/rafaeldepontes" target="_blank" rel="noopener">Rafael</a><br>
+                <small style="margin-top: 8px; display: block;">&copy; 2026 Gini Project. All rights reserved.</small>
+            </p>
         </footer>
     </div>
 
-    <script>
-        (function () {
-            const url = 'https://github.com/rafaeldepontes/gini';
-            const btn = document.getElementById('githubBtn');
-            btn.addEventListener('click', function () {
-                window.open(url, '_blank', 'noopener');
-            });
-        })();
-
-        (function () {
-            const url = 'https://github.com/rafaeldepontes/gini/blob/main/LICENSE';
-            const btn = document.getElementById('licenseBtn');
-            btn.addEventListener('click', function () {
-                window.open(url, '_blank', 'noopener');
-            });
-        })();
-    </script>
+    <!-- Scripts -->
+    <script src="public/js/main.js"></script>
 </body>
 
 </html>

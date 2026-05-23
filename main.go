@@ -9,10 +9,24 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var OK = []byte("ok")
+var (
+	OK        = []byte("ok")
+	templates *template.Template
+)
 
 func init() {
 	_ = godotenv.Load(".env")
+	// Parse all templates in internal/templates at startup
+	templates = template.Must(template.ParseGlob("internal/templates/*.html.tmpl"))
+}
+
+// render is a helper to serve HTML templates
+func render(w http.ResponseWriter, name string, data interface{}) {
+	err := templates.ExecuteTemplate(w, name, data)
+	if err != nil {
+		log.Printf("[ERROR] Couldn't render template %s: %v\n", name, err)
+		http.Error(w, "Something went really wrong", http.StatusInternalServerError)
+	}
 }
 
 func main() {
@@ -32,18 +46,7 @@ func main() {
 	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		mainT, err := template.ParseFiles("internal/templates/main-page.html.tmpl")
-		if err != nil {
-			log.Println("[ERROR] could parse html file: ", err)
-			http.Error(w, "Something went really wrong", http.StatusInternalServerError)
-			return
-		}
-
-		if err = mainT.Execute(w, nil); err != nil {
-			log.Println("[ERROR] Couldn't parse the web page: ", err)
-			http.Error(w, "Something went really wrong", http.StatusInternalServerError)
-			return
-		}
+		render(w, "main-page.html.tmpl", nil)
 	})
 
 	log.Printf("Application running on port %s\n", port)
