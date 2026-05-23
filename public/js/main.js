@@ -12,7 +12,7 @@ const lines = [
     { text: "my-awesome-app\n", type: "command", delay: 800 },
     { text: "Git username: ", type: "output", delay: 300 },
     { text: "nice-user\n", type: "command", delay: 800 },
-    { text: ">> Area you going to use Docker? (y/n) ", type: "output", delay: 300 },
+    { text: ">> Are you going to use Docker? (y/n) ", type: "output", delay: 300 },
     { text: "n\n", type: "command", delay: 800 },
     { text: ">> Are you going to use Nix? (y/n) ", type: "output", delay: 300 },
     { text: "n\n\n", type: "command", delay: 800 },
